@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>XslTui</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.22.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" />
+    <link rel="stylesheet" href="ui.css" />
+    
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.22.0/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.22.0/mode/xml/xml.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <main>
+      <section id="xml">
+        <header>
+          <h1>XML</h1>
+        </header>
+        <div class="content">
+          <textarea id="xml">A</textarea>
+        </div>
+        <footer>
+          <div class="errors"></div>
+        </footer>
+      </section>
+      
+      <section id="xslt">
+        <header>
+          <h1>XSLT</h1>
+        </header>
+        <div class="content">
+          <textarea id="xslt"></textarea>
+        </div>
+        <footer>
+          <div class="errors"></div>
+        </footer>
+      </section>
+      
+      <section id="output">
+        <header>
+          <h1>Output</h1>
+        </header>
+        <div class="content">
+          <textarea id="output"></textarea>
+        </div>
+        <footer>
+          <div class="errors"></div>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
