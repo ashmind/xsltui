@@ -38,7 +38,20 @@ $(function() {
   
   function load(editor) {
     var value = localStorage.getItem(storagePrefix + editor[editorType]);
-    editor.setValue(value || '');
+    if (value === undefined || value === null)
+      value = getDefaultValue(editor);
+    
+    editor.setValue(value);
+  }
+  
+  function getDefaultValue(editor) {
+    var value = $(editor.getWrapperElement())
+                   .siblings('script[data-default]')
+                   .text()
+                   .trim();
+    var lines = value.split(/[\r\n]+/g);
+    var indent = lines[lines.length - 1].match(/^\s*/)[0];
+    return value.replace(new RegExp(indent, 'g'), '');
   }
     
   function updateResult() {
