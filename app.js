@@ -2,23 +2,44 @@
 
 $(function() {
   'use strict';
-    
-  var xmlEditor  = CodeMirror.fromTextArea($('#xml textarea')[0], {
+  var storagePrefix = 'xsltui.';
+  var editorType = '__xsltui_editorType__';
+  
+  var xmlEditor = CodeMirror.fromTextArea($('#xml textarea')[0], {
     mode: 'text/xml'/*,
     lineNumbers: true*/
   });
+  xmlEditor[editorType] = 'xml';
+  
   var xsltEditor = CodeMirror.fromTextArea($('#xslt textarea')[0], {
     mode: 'text/xml'/*,
     lineNumbers: true*/
   });
+  xsltEditor[editorType] = 'xslt';
+  
   var output = CodeMirror.fromTextArea($('#output textarea')[0], {
     /*lineNumbers: true*/
+    readOnly: true
   });
   
   [xmlEditor, xsltEditor].forEach(function(editor) {
-    editor.on('change', updateResult);
+    load(editor);
+    editor.on('change', function() {
+      save(editor);
+      updateResult();
+    });
   });
   updateResult();
+  
+  function save(editor) {
+    var value = editor.getValue();
+    localStorage.setItem(storagePrefix + editor[editorType], value);
+  }
+  
+  function load(editor) {
+    var value = localStorage.getItem(storagePrefix + editor[editorType]);
+    editor.setValue(value || '');
+  }
     
   function updateResult() {
     clearErrors();

@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
 
 * {
@@ -73,11 +72,12 @@ section .content {
 
 textarea, .CodeMirror {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 5px;
+  right: 5px;
   height: 100%;
   
-  font-family: 'Droid Sans Mono', 'Consolas', monospace;  
+  font-family: Consolas, Menlo, Monaco, monospace; 
+  line-height: 1.2;
 }
 
 /*.CodeMirror-gutters {
