@@ -21,6 +21,7 @@ $(function() {
     /*lineNumbers: true*/
     readOnly: true
   });
+  var $outputType = $('#output-type');
   
   [xmlEditor, xsltEditor].forEach(function(editor) {
     load(editor);
@@ -65,7 +66,9 @@ $(function() {
         return;
       }
 
-      output.setValue(transform(xml.document, xslt.document));
+      var result = transform(xml.document, xslt.document);
+      $outputType.text(result.type);
+      output.setValue(result.text);
     }
     catch (ex) {
       reportErrors(output, ex.message || ex);
@@ -75,9 +78,17 @@ $(function() {
   function transform(xmlDocument, xsltDocument) {
     var processor = new XSLTProcessor();
     processor.importStylesheet(xsltDocument);
-    var transformed = processor.transformToDocument(xmlDocument);
     
-    return (new XMLSerializer()).serializeToString(transformed);
+    var result = processor.transformToDocument(xmlDocument);
+    var outputTag = xsltDocument.getElementsByTagNameNS('http://www.w3.org/1999/XSL/Transform', 'output')[0];
+    var method = (outputTag ? outputTag.getAttribute('method') : null) || 'xml';
+    if (method !== 'text')
+      return { type: method.toUpperCase(), text: (new XMLSerializer()).serializeToString(result) };
+    
+    var textElement = result.getElementsByTagNameNS('http://www.mozilla.org/TransforMiix', 'result')[0]
+                   || result.getElementsByTagName('pre', 'result')[0];
+    
+    return { type: 'Text', text: textElement.textContent };
   }
   
   function parseXML(xml) {

@@ -34,7 +34,9 @@ section > * {
 section header {
   padding: 5px;
   padding-left: 7px;
-  background-color: #aaa;
+  background-color: #aaa;  
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #fff; 
 }
 
 /*#xml header {
@@ -50,12 +52,15 @@ section header {
 }*/
 
 section h1 {
+  display: inline;
   margin: 0;
-  color: #fff;  
-  font-family: 'Roboto Condensed', sans-serif;
+  
   font-size: 100%;
-  font-weight: normal;
+  font-weight: normal;  
 }
+
+#output-type::before { content: '('; }
+#output-type::after  { content: ')'; }
 
 section header,
 section footer {
