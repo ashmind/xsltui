@@ -6,14 +6,14 @@ $(function() {
   var editorType = '__xsltui_editorType__';
   
   var xmlEditor = CodeMirror.fromTextArea($('#xml textarea')[0], {
-    mode: 'text/xml'/*,
-    lineNumbers: true*/
+    mode: 'text/xml',
+    autoCloseTags: true
   });
   xmlEditor[editorType] = 'xml';
   
   var xsltEditor = CodeMirror.fromTextArea($('#xslt textarea')[0], {
-    mode: 'text/xml'/*,
-    lineNumbers: true*/
+    mode: 'text/xml',
+    autoCloseTags: true
   });
   xsltEditor[editorType] = 'xslt';
   
