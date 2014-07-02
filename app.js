@@ -16,7 +16,10 @@ $(function() {
     function makeEditor(editorType) {
         var editor = CodeMirror.fromTextArea($('#' + editorType + ' textarea')[0], {
             mode: 'text/xml',
-            autoCloseTags: true
+            autoCloseTags: true,
+            tabSize: 2,
+
+            extraKeys: { Tab: indentWithSpaces }
         });
 
         load(editor, editorType);
@@ -26,6 +29,14 @@ $(function() {
         });
 
         return editor;
+
+        function indentWithSpaces(cm) {
+            if (cm.somethingSelected()) {
+                cm.indentSelection("add");
+            } else {
+                cm.replaceSelection(Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+            }
+        }
 
         function save() {
             var value = editor.getValue();
