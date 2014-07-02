@@ -4,7 +4,7 @@
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-} 
+}
 
 html, body, main {
   width: 100%;
@@ -21,9 +21,9 @@ section {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
-  flex-direction: column;  
-  -webkit-flex: 0 0 33%;
-  flex: 0 0 33%;
+  flex-direction: column;
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
   height: 100%;
 }
 
@@ -34,9 +34,9 @@ section > * {
 section header {
   padding: 5px;
   padding-left: 7px;
-  background-color: #aaa;  
+  background-color: #aaa;
   font-family: 'Roboto Condensed', sans-serif;
-  color: #fff; 
+  color: #fff;
 }
 
 /*#xml header {
@@ -54,9 +54,9 @@ section header {
 section h1 {
   display: inline;
   margin: 0;
-  
+
   font-size: 100%;
-  font-weight: normal;  
+  font-weight: normal;
 }
 
 #output-type::before { content: '('; }
@@ -65,7 +65,7 @@ section h1 {
 section header,
 section footer {
   -webkit-flex: 0 0 auto;
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   border-right: 1px solid #fff;
 }
 
@@ -81,8 +81,8 @@ textarea, .CodeMirror {
   left: 5px;
   right: 5px;
   height: 100%;
-  
-  font-family: Consolas, Menlo, Monaco, monospace; 
+
+  font-family: Consolas, Menlo, Monaco, monospace;
   line-height: 1.2;
 }
 
@@ -97,12 +97,13 @@ textarea, .CodeMirror {
 
 .errors {
   padding: 5px;
-  
-  color: #fff;  
+
+  color: #fff;
   background-color: #dc3912;
   white-space: pre-line;
+  max-width: 100%;
 }
 
 .errors:empty {
-  display: none;  
+  display: none;
 }
