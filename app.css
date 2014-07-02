@@ -79,7 +79,7 @@ section .content {
 textarea, .CodeMirror {
   position: absolute;
   left: 5px;
-  right: 5px;
+  right: 0;
   height: 100%;
 
   font-family: Consolas, Menlo, Monaco, monospace;
