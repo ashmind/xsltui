@@ -3,16 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>xsltui</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/hint/show-hint.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" />
     <link rel="stylesheet" href="app.css" />
-    
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/edit/closetag.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/xml/xml.js"></script>
-    <script src="app.js"></script>
   </head>
   <body>
     <main>
@@ -30,7 +25,7 @@
           <div class="errors"></div>
         </footer>
       </section>
-      
+
       <section id="xslt">
         <header>
           <h1>XSLT</h1>
@@ -40,7 +35,7 @@
           <script data-default type="text/xml">
             <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <xsl:output method="xml" />
-            
+
               <xsl:template match="@*|node()">
                 <xsl:copy>
                   <xsl:apply-templates select="@*|node()"/>
@@ -53,7 +48,7 @@
           <div class="errors"></div>
         </footer>
       </section>
-      
+
       <section id="output">
         <header>
           <h1>Output</h1>
@@ -67,5 +62,15 @@
         </footer>
       </section>
     </main>
+
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/hint/show-hint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/hint/xml-hint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/edit/closetag.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/edit/closebrackets.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/xml/xml.js"></script>
+    <script src="xslt-schema.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

@@ -86,6 +86,10 @@ textarea, .CodeMirror {
   line-height: 1.2;
 }
 
+.CodeMirror-hints {
+    font-family: Consolas, Menlo, Monaco, monospace;
+}
+
 /*.CodeMirror-gutters {
   background-color: transparent;
   border: 0;
