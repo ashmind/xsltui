@@ -1,13 +1,22 @@
-(function(f) {
+(function(app) {
     "use strict";
-    f(window.CodeMirror, window.XSLTProcessor, window._modules["xslt-schema"]);
-})(function(CodeMirror, XSLTProcessor, xsltSchema) {
+    app(
+        window.CodeMirror,
+        window.XSLTProcessor,
+        window._modules["xslt-schema"],
+        window._modules["xml-hint-keys"]
+    );
+})(function(CodeMirror, XSLTProcessor, xsltSchema, xmlHintKeys) {
     "use strict";
     var storagePrefix = "xsltui.";
 
     var xmlEditor = makeEditor("xml");
     var xsltEditor = makeEditor("xslt", {
-        extraKeys: getCodeCompletionKeys(),
+        mode: {
+            name: 'text/xml',
+            isBuiltin: generateIsBuiltin(xsltSchema)
+        },
+        extraKeys: xmlHintKeys,
         hintOptions: { schemaInfo: xsltSchema }
     });
     var output = CodeMirror.fromTextArea($("#output textarea")[0], {
@@ -134,42 +143,16 @@
         $(".errors").text("");
     }
 
-    function getCodeCompletionKeys() {
-        return {
-            "'<'": completeAfter,
-            "'/'": completeIfAfterLt,
-            "' '": completeIfInTag,
-            "'='": completeIfInTag,
-            "Ctrl-Space": "autocomplete"
-        };
+    function generateIsBuiltin(schema) {
+        return (function isBuiltIn(tagName, attrName) {
+            var tag = schema[tagName];
+            if (!tag)
+                return false;
 
-        function completeAfter(cm, condition) {
-            if (!condition || condition()) {
-                setTimeout(function() {
-                    if (!cm.state.completionActive)
-                        cm.showHint({ completeSingle: false });
-                }, 100);
-            }
+            if (!attrName)
+                return true;
 
-            return CodeMirror.Pass;
-        }
-
-        function completeIfAfterLt(cm) {
-            return completeAfter(cm, function() {
-                var cursor = cm.getCursor();
-                return cm.getRange(CodeMirror.Pos(cursor.line, cursor.ch - 1), cursor) === "<";
-            });
-        }
-
-        function completeIfInTag(cm) {
-            return completeAfter(cm, function() {
-                var token = cm.getTokenAt(cm.getCursor());
-                if (token.type === "string" && (!/['"]/.test(token.string.charAt(token.string.length - 1)) || token.string.length === 1))
-                    return false;
-
-                var inner = CodeMirror.innerMode(cm.getMode(), token.state).state;
-                return inner.tagName;
-            });
-        }
+            return tag.attrs[attrName] !== undefined;
+        });
     }
 });

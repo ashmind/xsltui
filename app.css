@@ -99,6 +99,18 @@ textarea, .CodeMirror {
   color: #eee;
 }*/
 
+.cm-s-default .cm-tag {
+  color: #708;
+}
+
+.cm-s-default .cm-bracket {
+  color: #555;
+}
+
+.cm-s-default .cm-tag.cm-builtin {
+  color: #170;
+}
+
 .errors {
   padding: 5px;
 
